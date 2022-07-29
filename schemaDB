@@ -1,0 +1,116 @@
+# Esquema datos emprendimiento por dimensiones impactos v.0
+{
+ # Atributos basicos emprendimiento
+ 'nombre_emprendimiento': str,
+ 'tipo_emprendimiento': str, 
+ 'plataforma': str,          
+ 'region': str,
+ 'fase': str,
+ 'vigencia':date, 
+ 'integrantes_emprendimiento':[{  'nombre': str,
+                                'genero': str,
+                                'nivel_academico': str
+                                'institucion': str,
+                                'profesion': str},
+                                ...,
+                                {N}
+                            ],
+  # more fields ...
+ 
+ #IMPACT FIELDS
+ # PERMANENCIA EMPRESARIAL -> Camara de comercio - RUES - convenio acce en desarrollo
+    'razon_social':str,
+    'nit':int,
+    'fecha_matricula':date,
+    'fecha_disolucion':date,
+    'fechas_renovación':list(date), 
+    'fecha_formalizacion':date,
+    'tipo_sociedad':str,
+    'tamaño':str,
+    'sector_economico':str,
+    'actividades_economicas':list,
+    'ingresos':int,
+
+ # CAPACIDADES COMERCIALES      -> Camara de comercio - RUES - convenio acce en desarrollo
+
+ 'exportaciones':[{'año':date,
+                 'cant_export':int,
+                 'paises_origen':list(str),
+                 'rango_importaciones':int(usd),
+                 'cap_arancel_export':list}]
+ 
+ 'importaciones': [{'año':date,
+                  'cant_import':int,
+                  'paises_destino':list(str),
+                  'rango_import':int(usd),
+                  'cap_arancel_import':list(str)]
+ 
+ # CONTRIBUCION ECONOMICA TERRITORIO -> Camara de comercio - RUES - convenio acce en desarrollo
+
+ 'empleos':[{'año':date,num_empleos:int,'tipo_empleos':str}]
+
+ 'ingresos':[{'año':date,'ingreso':int, 'activos':int}] # igresos o ventas
+  
+ # Exposicion empresarial
+  'rankings':[{'nombre':str,'categoria':str;'año':date}...{N}]
+ 
+ # CAPITAL RELACIONAL
+ 'capital_relacional' : {
+                        'socios':[{}],
+
+                        'clientes':[{}],
+
+                        'proveedores':[{}]
+                      },
+ 
+ # GENERACION DE ACTIVOS DE CONOCIMIENTO -> BDs-COLAV 
+
+    # activos cientifico                                                      
+    'derechos_autor':[{'type_of_publication':str,'title':str,'year':date,'url':str}] 
+
+    # activos  tecnologico
+    # -> ver: https://repositorioacademico.upc.edu.pe/bitstream/handle/10757/660023/10.19083reporte660023.pdf?sequence=7
+                                 # -> https://www.wipo.int/edocs/pubdocs/es/patents/434/wipo_pub_l434_11.pdf
+
+    'patentes': [{
+                'titulo_patente':str,
+                'nro_patente':int,
+                'titular':{'nombre':str,
+                            'institucion':str
+                            },
+                'fecha':date,
+                'pais':str,
+                'autores':[{'nombre':str,
+                                        'institucion':str
+                           }, ... , 
+                           {N}
+                          ]
+               }]           
+
+    'secretos_industriales':[{'secreto_industrial':str,
+                            'producto_proceso_comercializado':str,
+                            'año':date,
+                            'autores':[{'nombre':str,
+                                        'institucion':str
+                                       }, ... , 
+                                       {N}
+                                      ],
+                                      ]
+    
+    # Otros
+    'registros':[{'numero_registro_signo_distintivo':str,   # -> http://consultas2.oepm.es/LocalizadorWeb/
+                'nombre_registro':str,
+                'nombre_titular':str,
+                'año_de_optención':str,
+                'mes':str,
+                'pais':str,
+                'autores':[{'nombre':str,
+                                        'institucion':str
+                                       }, ... , 
+                                       {N}
+                                      ],
+                          }]
+  
+ # ODS
+
+}
