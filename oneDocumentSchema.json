@@ -1,60 +1,70 @@
-# Esquema datos emprendimiento por dimensiones impactos v.0
+# Esquema emprendimiento y dimensiones impactos v.1.
 {
- # Atributos basicos emprendimiento
+ # Atributos basicos
  'nombre_emprendimiento': str,
- 'tipo_emprendimiento': str, 
- 'plataforma': str,          
- 'region': str,
- 'fase': str,
- 'vigencia':date, 
- 'integrantes_emprendimiento':[{  'nombre': str,
+ 'tipo_emprendimiento': str, # 1. spin-offs udea, 2. instituciones academicas sup  , 3 comunidad emprenderora genereal valle Aburra, regiones
+ 'plataforma': str,          # nombre del proyecto o convenio que implementa alguna tipologia de gestión del emprendimiento;
+ 'region': str,              # region antioquia
+ 'fase': str,                # pre-incubacion, incubacion, pos-incubacion, 
+ 'vigencia':date,            # año en que se realiza el acompañamiento
+ 'integrantes_emprendimiento':[{'nombre': str, # 
                                 'genero': str,
-                                'nivel_academico': str
+                                'nivel_academico': str,
                                 'institucion': str,
                                 'profesion': str},
                                 ...,
                                 {N}
-                            ],
-  # more fields ...
+                            ], 
  
- #IMPACT FIELDS
- # PERMANENCIA EMPRESARIAL -> Camara de comercio - RUES - convenio acce en desarrollo
+ # Permanencia empresarial
     'razon_social':str,
     'nit':int,
     'fecha_matricula':date,
     'fecha_disolucion':date,
-    'fechas_renovación':list(date), 
+    'fechas_renovación':list(date), # Esto deberia estar incluido en una lista, paa tener el historico de renovaciones ? 
     'fecha_formalizacion':date,
     'tipo_sociedad':str,
     'tamaño':str,
     'sector_economico':str,
-    'actividades_economicas':list,
+    'actividades_economicas':['nombre actividad 1', 'nombre actividad 2', ... N],
     'ingresos':int,
 
- # CAPACIDADES COMERCIALES      -> Camara de comercio - RUES - convenio acce en desarrollo
+ # Comercio internacional
 
  'exportaciones':[{'año':date,
                  'cant_export':int,
-                 'paises_origen':list(str),
-                 'rango_importaciones':int(usd),
+                 'paises_destino':list(str),
+                 'valor_importaciones':int(usd),
                  'cap_arancel_export':list}]
  
  'importaciones': [{'año':date,
                   'cant_import':int,
-                  'paises_destino':list(str),
-                  'rango_import':int(usd),
+                  'paises_origen':list(str),
+                  'valor_import':int(usd),
                   'cap_arancel_import':list(str)]
  
- # CONTRIBUCION ECONOMICA TERRITORIO -> Camara de comercio - RUES - convenio acce en desarrollo
+ # Contribucion economica territorio
 
- 'empleos':[{'año':date,num_empleos:int,'tipo_empleos':str}]
+ 'empleos':[{'año':date,
+             'num_empleos':int,
+             'empleos_directos':int,
+             'empleos_indirectos':int,
+             'sum_costo_empleos':int
+             }...{N}]
 
- 'ingresos':[{'año':date,'ingreso':int, 'activos':int}] # igresos o ventas
+ 'estados_financieros':[{'año':date,
+                         'activos':int,
+                         'ingresos':int,
+                         'impuesto':int # impuestos pasivos + impuestos corrientes -> fuente SIIS
+                        }] 
   
  # Exposicion empresarial
-  'rankings':[{'nombre':str,'categoria':str;'año':date}...{N}]
+  'rankings':[{'nombre_ranking':str,
+               'alcance_geografico':str,  # local, nacional, inernacional
+               'año':date,
+               }...{N}]
  
- # CAPITAL RELACIONAL
+ # Capital relacional
  'capital_relacional' : {
                         'socios':[{}],
 
@@ -63,14 +73,20 @@
                         'proveedores':[{}]
                       },
  
- # GENERACION DE ACTIVOS DE CONOCIMIENTO -> BDs-COLAV 
+ # Generacion de activos de conocimiento y tecnologico-> 
 
     # activos cientifico                                                      
-    'derechos_autor':[{'type_of_publication':str,'title':str,'year':date,'url':str}] 
+    'derechos_autor':[{'tipo_de_publicación':str,
+                       'titulo':str,
+                       'año':date,
+                       'url':str           # o identificador
+                       }] 
 
     # activos  tecnologico
     # -> ver: https://repositorioacademico.upc.edu.pe/bitstream/handle/10757/660023/10.19083reporte660023.pdf?sequence=7
                                  # -> https://www.wipo.int/edocs/pubdocs/es/patents/434/wipo_pub_l434_11.pdf
+                    
+    # https://www.sic.gov.co/tema/propiedad-Industrial
 
     'patentes': [{
                 'titulo_patente':str,
@@ -91,14 +107,14 @@
                             'producto_proceso_comercializado':str,
                             'año':date,
                             'autores':[{'nombre':str,
-                                        'institucion':str
+                                        'institucion':str,
                                        }, ... , 
                                        {N}
                                       ],
-                                      ]
+                            ] 
     
     # Otros
-    'registros':[{'numero_registro_signo_distintivo':str,   # -> http://consultas2.oepm.es/LocalizadorWeb/
+    'registros_marcas_signos':[{'numero_registro_signo_distintivo':str,   # -> https://www.sic.gov.co/marcas
                 'nombre_registro':str,
                 'nombre_titular':str,
                 'año_de_optención':str,
@@ -111,6 +127,6 @@
                                       ],
                           }]
   
- # ODS
+ # ods 
 
 }
